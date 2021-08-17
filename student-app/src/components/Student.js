@@ -4,11 +4,12 @@ import "./Student.css";
 import { useState } from "react";
 import studentservice from "../services/Service";
 import { useEffect } from "react";
+import { Data } from "./Data";
 import * as Yup from "yup";
-
+var Loader = require('react-loader');
 function Student() {
   const [data, setdata] = useState([]);
-  const [id, setid] = useState("id");
+  const [loaded,setloaded]=useState(true)
   const validationSchema = Yup.object({
     name: Yup.string().required("Required").typeError("String is required"),
     dateofbirth: Yup.string().required("Required"),
@@ -26,11 +27,12 @@ function Student() {
     },
     validationSchema,
     onSubmit: (values) => {
+      setloaded(false)
       studentservice
         .addstudent(values)
         .then((result) => {
           if (result.status === 201) {
-            console.log(result);
+            setloaded(true)
             getallstudents();
           }
         })
@@ -39,17 +41,13 @@ function Student() {
         });
     },
   });
-
-  useEffect(() => {
-    getallstudents();
-  }, [id]);
-
   const getallstudents = (event) => {
+    
     studentservice
       .getallstudents()
       .then((result) => {
         if (result.status === 200) {
-          console.log(result.data);
+         
           setdata(result.data);
         }
       })
@@ -57,13 +55,18 @@ function Student() {
         console.log(err);
       });
   };
+  
+useEffect(() => {
+  getallstudents();
+},[]);
+
 
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-4 shadow-sm bg-white px-1 mx-auto mx-0  rounded-3 ">
-          <h2>
-            <strong className="text-center">Register Student</strong>
+        <div className="col-5 shadow-sm bg-white px-1 mx-auto mx-0  rounded-3 ">
+          <h2 className="text-center">
+            <strong >Register Student</strong>
           </h2>
           <form
             action=""
@@ -87,7 +90,7 @@ function Student() {
             </div>
             <div className="col-md-6 col-12 form-group mb-3">
               <label>
-                date of Birth <span className="text-danger">*</span>
+                Date of Birth <span className="text-danger">*</span>
               </label>
               <input
                 type="date"
@@ -101,7 +104,7 @@ function Student() {
             </div>
             <div className="col-md-6 col-12 form-group mb-3">
               <label htmlFor="">
-                class<span className="text-danger">*</span>
+               Class <span className="text-danger">*</span>
               </label>
               <select
                 name="sclass"
@@ -181,52 +184,33 @@ function Student() {
               </div>
               <div className="text-center  ">
                 <button className="btn btn-success" type="submit">
-                  Submit
+                  Register
                 </button>
               </div>
             </div>
           </form>
         </div>
         <div className="col-6 shadow-sm bg-white px-1 mx-auto mx-0  rounded-3 ">
-          <h2>
-            <strong className="text-center"> Students</strong>
-          </h2>
-          <table className="uk-table uk-table-responsive uk-table-divider border bg-white">
-            <thead>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <th className="text-md-center text-start">SL.No</th>
-                <th className="text-md-center text-start">Student Name</th>
-                <th className="text-md-center text-start">Date of birth</th>
-                <th className="text-md-center text-start">class</th>
-                <th className="text-md-center text-start">Division</th>
-                <th className="text-md-center text-start">Gender</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((obj, i) => {
-                return (
-                  <tr key={obj.id}>
-                    <td className="text-md-center text-start">{i + 1}</td>
-                    <td className="text-md-center text-start">{obj.name}</td>
-                    <td className="text-md-center text-start">
-                      {obj.dateofbirth}
-                    </td>
-                    <td className="text-md-center text-start">{obj.sclass}</td>
-                    <td className="text-md-center text-start">
-                      {obj.divishion}
-                    </td>
-                    <td className="text-md-center text-start">{obj.gender}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          
+          {data.length===0? (
+           <div className=' justify-content-center d-flex align-items-center'>
+              <h3 className='text-danger'>No students found!!.please add students</h3>
+           </div>
+            
+          ): (
+            <Data  student={data}></Data>
+          )}
+        
+        </div>
+       
+        <div className='loader'>
+        <Loader loaded={loaded} lines={13} length={20} width={10} radius={30}
+    corners={1} rotate={0} direction={1} color="red" speed={1}
+    trail={60} shadow={false} hwaccel={false} className="spinner"
+    zIndex={2e9} top="50%" left="50%" scale={1.00}
+    loadedClassName="loadedContent" />
         </div>
       </div>
+     
     </div>
   );
 }

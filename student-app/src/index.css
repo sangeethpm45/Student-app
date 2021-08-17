@@ -1,11 +1,10 @@
-html {
-    height: 100%;
-  }
-  
-  body {
-    height: 100%;
-  }
-  
+body, html {
+  height: 100%;
+  margin: 0;
+  background:linear-gradient(to right, rgb(116, 235, 213), rgb(172, 182, 229));
+  font-family: 'STIX Two Text', serif;
+}
+
 
   
   div.app {

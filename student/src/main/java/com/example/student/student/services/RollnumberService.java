@@ -20,10 +20,14 @@ public class RollnumberService {
     @Autowired
    private MongoOperations mongoOperations;
 
-   public int getRollnumber(String roll){
+   public int getSlnumber(String roll){
        Query query= new Query(Criteria.where("id").is(roll));
        Update update=new Update().inc("seq",1);
        RollNumber counter=mongoOperations.findAndModify(query,update,options().returnNew(true).upsert(true),RollNumber.class);
     return !Objects.isNull(counter)?counter.getSeq():1;
    }
+public String getRollnumber(int rollnumber){
+       String roll="R-00"+rollnumber;
+       return roll;
+}
 }

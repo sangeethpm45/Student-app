@@ -2,6 +2,8 @@ package com.example.student.student.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.student.student.services.RollnumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.student.student.model.Student;
 import com.example.student.student.repository.Studentrepository;
 
+import static com.example.student.student.model.Student.SEQUENCE_NAME;
 
 
 @CrossOrigin(origins ="http://localhost:3000")
@@ -30,6 +33,8 @@ public class StudentController {
   
   @Autowired
   Studentrepository studentRepository;
+@Autowired
+ private RollnumberService service;
 
 
   @GetMapping("/all")
@@ -50,12 +55,13 @@ public class StudentController {
   }
 
   @PostMapping("/addstudents")
-
   @ResponseBody
   public ResponseEntity<Student> createStudent(@RequestBody Student student) {
 
     try {
-      Student _tutorial = studentRepository.insert(student);
+        student.setSl_number(service.getSlnumber(Student.SEQUENCE_NAME));
+        student.setRollnumber(service.getRollnumber(student.getSl_number()));
+        Student _tutorial = studentRepository.insert(student);
       return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
