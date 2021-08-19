@@ -3,6 +3,8 @@ package com.example.student.student.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+// Bean for generate rollnumber sequence 
+
 @Document(collection = "rollnumber")
 public class RollNumber {
     @Id

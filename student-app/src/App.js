@@ -1,6 +1,5 @@
-
-import './App.css';
-import Student from './components/Student'
+import "./App.css";
+import Student from "./components/Student";
 function App() {
   return (
     <div className="App h-100">
