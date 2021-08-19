@@ -1,10 +1,10 @@
 # Student-app
-A basic student app with registration and view function. here you can register students and it will automatically generate a roll number and assign it to the student. 
+* A basic student app with registration and view function. here you can register students and it will automatically generate a roll number and assign it to the student. 
 
-Here React is used for frontend development and Springboot for the backend. 
+* Here React is used for frontend development and Springboot for the API creation and mongodb as Database. 
 
-Both frontend and backend source code is uploaded in this same repository.
+* Both frontend and backend source code is uploaded in this same repository.
 
-The "student-app" folder contains the frontend  (React) and the "student" folder contains the backend (Springboot) source codes.
+* The "student-app" folder contains the frontend  (React) and the "student" folder contains the backend (Springboot) source codes.
 
 
