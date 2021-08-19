@@ -1,13 +1,12 @@
 body, html {
   height: 100%;
   margin: 0;
-  background:linear-gradient(to right, rgb(116, 235, 213), rgb(172, 182, 229));
+  background:linear-gradient(to right, rgb(168, 255, 120), rgb(120, 255, 214));
   font-family: 'STIX Two Text', serif;
 }
-
+div#root{
+  height: 100%;
+}
 
   
-  div.app {
-    height: 100%;
-    background-color: cornsilk;
-  }
+ 

@@ -9,10 +9,10 @@ export const Data = (props) => {
     const [data,setdata] = useState(props.student);
    
     return (
-        <div>
+        < div>
           
           <h2  className="text-center">
-            <strong className="text-center"> Students</strong>
+            <strong className="text-center text-dark"> Student Record</strong>
           </h2>
          
           <table className="uk-table uk-table-responsive uk-table-divider border bg-white">

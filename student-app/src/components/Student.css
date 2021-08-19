@@ -1,9 +1,8 @@
-.container-fluid
-{
-    
-    height: 100%;
-}
 
 h2{
     font-family: 'STIX Two Text', serif;
+}
+
+.data{
+    background:#fcefee;
 }

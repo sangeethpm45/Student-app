@@ -25,7 +25,7 @@ import com.example.student.student.repository.Studentrepository;
 import static com.example.student.student.model.Student.SEQUENCE_NAME;
 
 
-@CrossOrigin(origins ="http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://192.168.43.177:3000"})
 @RestController
 @RequestMapping("/api")
 @EnableAutoConfiguration

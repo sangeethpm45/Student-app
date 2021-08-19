@@ -62,15 +62,15 @@ useEffect(() => {
 
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-5 shadow-sm bg-white px-1 mx-auto mx-0  rounded-3 ">
+    <div className="container-fluid h-100 d-flex flex-column ">
+      <div className="row h-100 m-5 rounded-3">
+        <div className="col-md-6 col-lg-6   shadow-sm register h-75 m-3 mx-auto  bg-light   ">
           <h2 className="text-center">
             <strong >Register Student</strong>
           </h2>
           <form
             action=""
-            className="col-12 px-0 mx-0 row  bg-white"
+            className="col-12 px-0 mx-0 row  bg-light"
             onSubmit={formik.handleSubmit}
             onBlur={formik.handleBlur}
           >
@@ -86,7 +86,9 @@ useEffect(() => {
                 value={formik.values.name}
                 onBlur={formik.handleBlur}
               />
-              {formik.errors.name ? formik.errors.name : null}
+             <div style={{color:"red"}}>
+              {formik.touched.name ? formik.errors.name : null}
+              </div>
             </div>
             <div className="col-md-6 col-12 form-group mb-3">
               <label>
@@ -100,7 +102,9 @@ useEffect(() => {
                 onChange={formik.handleChange}
                 value={formik.values.dateofbirth}
               />
-              {formik.errors.dateofbirth ? formik.errors.dateofbirth : null}
+              <div style={{color:"red"}}>
+              {formik.touched.dateofbirth ? formik.errors.dateofbirth : null}
+              </div>
             </div>
             <div className="col-md-6 col-12 form-group mb-3">
               <label htmlFor="">
@@ -127,7 +131,9 @@ useEffect(() => {
                 <option value="IX"> IX</option>
                 <option value="X"> X</option>
               </select>
-              {formik.errors.sclass ? formik.errors.sclass : null}
+              <div style={{color:"red"}}>
+              {formik.touched.sclass ? formik.errors.sclass : null}
+              </div>
             </div>
 
             <div className="col-md-6 col-12 form-group mb-3">
@@ -140,18 +146,23 @@ useEffect(() => {
                 onChange={formik.handleChange}
                 value={formik.values.division}
                 onBlur={formik.handleBlur}
+                defaultValue="select divishion"
               >
-                <option value="" disabled defaultValue>
-                  Select division
+                <option value="select divishion"  defaultValue disabled>
+                  Select divishion
                 </option>
                 <option value="A">A</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
               </select>
-              {formik.errors.divishion ? formik.errors.divishion : null}
+              <div style={{color:"red"}}>
+              {formik.touched.divishion ? formik.errors.divishion : null}
+              </div>
             </div>
-            <div className="col-md-12 col-12  mb-3 ">
-              <p>Gender</p>
+            <div className="col-md-12  col-12  mb-3 ">
+              <p>Gender <span className="text-danger">*</span>{" "}
+
+              </p>
               <div className="form-check ">
                 <input
                   className="form-check-input"
@@ -180,7 +191,9 @@ useEffect(() => {
                 <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Female
                 </label>
-                {formik.errors.gender ? formik.errors.gender : null}
+                <div style={{color:"red"}}>
+              {formik.touched.gender ? formik.errors.gender : null}
+              </div>
               </div>
               <div className="text-center  ">
                 <button className="btn btn-success" type="submit">
@@ -190,10 +203,10 @@ useEffect(() => {
             </div>
           </form>
         </div>
-        <div className="col-6 shadow-sm bg-white px-1 mx-auto mx-0  rounded-3 ">
+        <div className="col-md-6 col-lg-6 m-3 h-75 shadow-sm data px-1 mx-auto    ">
           {data.length===0? (
-           <div className=' justify-content-center d-flex align-items-center'>
-              <h3 className='text-danger'>No students found!!.please add students</h3>
+           <div className=' justify-content-center d-flex'>
+              <h3 className='text-danger  d-flex align-self-center bg-white rounded-2 mt-3'>No Records Found !!</h3>
            </div>
             
           ): (
